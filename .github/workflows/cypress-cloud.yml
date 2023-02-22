@@ -5,7 +5,7 @@ on:
     inputs: 
       spec: 
         description: Run by cypress command line
-        default: cypress-io/github-action@v5.0.9
+        default: cypress/e2e/*
         
 jobs:
   cypress-e2e-electron:
@@ -14,14 +14,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3.3.0
         
-      - name: Cypress.io
+      - name: Cypress run
         uses: cypress-io/github-action@v5.0.9
         with:
           install-commands: yarn install
           browser: electron
           record: true
           group: UI Electron
-          spec: ${{github.event.inputs.spec}}
+          spec: ${{ github.event.inputs.spec }}
         env:
           CYPRESS_RECORD_KEY: ebd585e9-8633-4446-a2bc-9c36129f1075
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
